@@ -196,14 +196,37 @@ Update `sitemap.xml`:
 
 Check `Scripts/desktop.js`, `Scripts/mobile.js`, `Scripts/tablet.js` for embedded structured data (Schema.org JSON-LD). Update any URLs referencing the old domain if deploying to a new domain.
 
-### Step 10: Test and deploy
+### Step 10: Generate project documentation
+
+Generate 3 documentation files customized for the project. See [references/documentation-templates.md](references/documentation-templates.md) for the full templates.
+
+1. **README.md** — Project overview for developers
+   - Replace placeholders: `{{PROJECT_NAME}}`, `{{DOMAIN}}`, `{{DUDA_SITE_ID}}`, `{{PAGE_COUNT}}`, `{{ROUTE_TABLE}}`, `{{SKILL_REPO_URL}}`
+   - Fill in the route table from the route map built in Step 1
+   - List all known issues encountered and their solutions
+
+2. **GUIDE-SEO-DESIGN.md** — Collaboration guide for SEO & Design teams
+   - Replace: `{{PROJECT_NAME}}`, `{{DOMAIN}}`, `{{PAGE_TABLE}}`, `{{SITEMAP_COUNT}}`, `{{FONT_NAME}}`, `{{FONT_WEIGHTS}}`
+   - Fill in the page table with all pages and sitemap status
+   - Update meta tag examples from the actual homepage `<head>`
+   - Update slider info (count, slides per slider) from the actual homepage
+   - Update font/breakpoint specs from the actual CSS
+
+3. **GUIDE-DEVELOPER.md** — Developer workflow guide
+   - Replace: `{{PROJECT_NAME}}`, `{{REPO_URL}}`, `{{SKILL_REPO_URL}}`, `{{ROUTE_TABLE}}`
+   - Includes: AI-assisted dev setup (VS Code + Copilot with Claude Opus 4.6, Claude Code), branching strategy, PR process, Playwright testing, Figma design handoff workflow, deployment process
+
+All 3 files should be committed to the repo root.
+
+### Step 11: Test and deploy
 
 1. `npm install` then `npm run dev`
 2. Verify each page loads correctly at its clean URL
 3. Test device switching via Chrome DevTools User-Agent override
 4. Verify all navigation links, images, fonts, JS functionality
-5. Run Lighthouse audit for SEO score
-6. Deploy: `vercel deploy` or connect Git repo
+5. Run Playwright tests: `npx playwright test`
+6. Run Lighthouse audit for SEO score
+7. Deploy: `vercel deploy` or connect Git repo
 
 ## Common Issues
 
@@ -235,3 +258,14 @@ Check `Scripts/desktop.js`, `Scripts/mobile.js`, `Scripts/tablet.js` for embedde
 - [ ] Open Graph and Twitter Card meta tags have correct URLs
 - [ ] `<meta name="viewport">` present on all pages
 - [ ] All internal links use clean absolute paths (not relative)
+
+## Documentation Checklist
+
+- [ ] `README.md` created with project-specific migration details
+- [ ] `GUIDE-SEO-DESIGN.md` created with page list, meta tag examples, request templates
+- [ ] `GUIDE-DEVELOPER.md` created with AI setup, branching, PR process, Playwright tests
+- [ ] All `{{PLACEHOLDER}}` values replaced with actual project data
+- [ ] Meta tag examples filled from actual homepage `<head>` tags
+- [ ] Slider info filled from homepage analysis
+- [ ] Font/breakpoint specs match actual CSS
+- [ ] All 3 docs committed to repo root
